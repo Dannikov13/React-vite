@@ -11,6 +11,7 @@ export const ways = [
     title: "Имею опыт создания CSS-анимаций, трансформаций и других стилей.",
     description: "Опыт работы с вебсерверами",
   },
+  { title: "heelllo", description: "beeeyyy" },
 ];
 
 export const describe = {

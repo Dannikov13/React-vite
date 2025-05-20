@@ -2,29 +2,70 @@ import "./App.css";
 import Button from "./Button/Button.jsx";
 import Header from "./components/Header";
 import WayToTeach from "./components/WayToTeach";
-import { ways } from "./date.js";
+import { ways, describe } from "./date.js";
+import { useState } from "react";
 
 export default function App() {
-  let content = "Нажми на кнопку";
+  const [contentType, setContentType] = useState(null);
 
   function handleClick(type) {
-    console.log("Clicked", type);
+    setContentType(type);
   }
+
+  // let tabContent = null;
+
+  // if (contentType) {
+  //   tabContent = <p>{describe[contentType]}</p>;
+  // } else {
+  //   tabContent = <div>asdsad</div>;
+  // }
 
   return (
     <>
       <Header />
       <main>
-        <WayToTeach {...ways[0]} />
-        <WayToTeach {...ways[1]} />
-        <WayToTeach {...ways[2]} />
+        <section>
+          <ul>
+            {ways.map((way) => (
+              <WayToTeach key={way.title} {...way} />
+            ))}
+            {/* <WayToTeach title={ways[3].title} description={ways[3].description} />
+          <WayToTeach {...ways[0]} />
+          <WayToTeach {...ways[1]} />
+          <WayToTeach {...ways[2]} /> */}
+          </ul>
+        </section>
+
+        <section>
+          <Button
+            isActive={contentType === "way"}
+            onClick={() => handleClick("way")}
+          >
+            Доступность
+          </Button>
+          <Button
+            isActive={contentType === "easy"}
+            onClick={() => handleClick("easy")}
+          >
+            Конфиденцеальность
+          </Button>
+          <Button
+            isActive={contentType === "program"}
+            onClick={() => handleClick("program")}
+          >
+            Качество
+          </Button>
+
+          {/* {contentType ? <p>{describe[contentType]}</p> : <div>asdsad</div>} */}
+          {/* 
+          {!contentType ? <div>asdsad</div> : null}
+          {contentType ? <p>{describe[contentType]}</p> : null} */}
+
+          {!contentType && <div>asdsad</div>}
+          {contentType && <p>{describe[contentType]}</p>}
+          {/* <p>{tabContent}</p> */}
+        </section>
       </main>
-      <section>
-        <Button onClick={() => handleClick("way")}>Доступность</Button>
-        <Button onClick={() => handleClick("easy")}>Конфиденцеальность</Button>
-        <Button onClick={() => handleClick("program")}>Качество</Button>
-      </section>
-      <p>{content}</p>
     </>
   );
 }
