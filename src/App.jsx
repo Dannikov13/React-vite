@@ -1,35 +1,30 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import "./App.css";
+import Button from "./Button/Button.jsx";
+import Header from "./components/Header";
+import WayToTeach from "./components/WayToTeach";
+import { ways } from "./date.js";
 
-function App() {
-  const [count, setCount] = useState(0)
+export default function App() {
+  let content = "Нажми на кнопку";
+
+  function handleClick(type) {
+    console.log("Clicked", type);
+  }
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <Header />
+      <main>
+        <WayToTeach {...ways[0]} />
+        <WayToTeach {...ways[1]} />
+        <WayToTeach {...ways[2]} />
+      </main>
+      <section>
+        <Button onClick={() => handleClick("way")}>Доступность</Button>
+        <Button onClick={() => handleClick("easy")}>Конфиденцеальность</Button>
+        <Button onClick={() => handleClick("program")}>Качество</Button>
+      </section>
+      <p>{content}</p>
     </>
-  )
+  );
 }
-
-export default App
